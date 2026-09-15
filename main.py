@@ -34,6 +34,10 @@ class TicTacToe:
 
     def get_board(self):
         return self.board
+
+    def print_board(self) -> None:
+        for i in range(0,7,3):
+            print(f"{self.board[i]} {self.board[i+1]} {self.board[i+2]}")
     
 
 def main():
