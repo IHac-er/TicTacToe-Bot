@@ -1,5 +1,8 @@
 from bot import TicTacToeBot
 
+class OccupiedPosition(Exception): 
+    pass 
+
 class TicTacToe: 
     def __init__(self):
         self.board = ['-','-','-','-','-','-','-','-','-']
@@ -30,6 +33,8 @@ class TicTacToe:
         return False
 
     def play_move(self, position, token) -> None:
+        if self.board[position]  != '-':
+            raise OccupiedPosition("Position is occupied!")
         self.board[position] = token
 
     def get_board(self) -> list[str]:
@@ -45,8 +50,16 @@ def main():
     print("TIC-TAC-TOE")
     print("=" * 100)
 
-    player_turn = True if input("Do you want to go first?(Y/N): ").lower().strip() == "y" else False 
+    while True:
+        user_choice = input("Do you want to go first?(Y/N): ").lower().strip()
 
+        if user_choice not in ['y', 'n']:
+            print("Invalid Input! Try Again.")
+            continue
+
+        player_turn = (user_choice == "y")
+        break
+    
     if player_turn: 
         player_token, bot_token = 'X' , 'O'
     else: 
@@ -58,12 +71,26 @@ def main():
     board.print_board()
 
     while not board.game_over():
+
         if player_turn: 
-            player_choice = int(input("Enter a number (1-9): "))
-            board.play_move(player_choice-1, player_token)
+            try: 
+                player_choice = int(input("Enter a number (1-9): "))
+                if not 1 <= player_choice <= 9: 
+                    continue 
+            except: 
+                print("Invalid Input! Try Again.")
+                continue
+
+            try:
+                board.play_move(player_choice-1, player_token)
+            except OccupiedPosition as e: 
+                print(f"{e}! Try Again.")
+                continue
+
             bot.update_board(board.get_board())
             board.print_board()
             player_turn = False 
+
         else:
             print("Bot Thinking...")
             bot_pos = bot.best_move()
