@@ -24,4 +24,18 @@ class TicTacToeBot:
 
         return False
 
+    def available_moves(self) -> list: 
+        position_list = list()
+
+        for index_pos in range(0,len(self.board)):
+            if self.board[index_pos] == '-':
+                position_list.append(index_pos)
+
+        return position_list
+
+    def play_move(self, position, token) -> None:
+        self.board[position] = token
+
+    def undo_move(self, position) -> None: 
+        self.board[position] = '-'
     
