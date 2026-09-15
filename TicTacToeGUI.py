@@ -25,7 +25,8 @@ class TicTacToeGUI:
         
         self.buttons[position].config(text='X')
 
-        if self.game.game_over():
+        if self.game.game_over()[1]:
+            print(self.game.game_over()[0])
             return
 
         self.bot.update_board(self.game.get_board())
@@ -37,7 +38,8 @@ class TicTacToeGUI:
 
         self.bot.update_board(self.game.get_board())
 
-        if self.game.game_over():
+        if self.game.game_over()[1]:
+            print(self.game.game_over()[0])
             return
 
     def create_board(self):
@@ -59,7 +61,6 @@ class TicTacToeGUI:
 
     def run(self):
         self.root.mainloop()
-
 
 if __name__ == "__main__":
     app = TicTacToeGUI()

@@ -1,7 +1,10 @@
+import sys
+
 from bot import TicTacToeBot
 from TicTacToe import TicTacToe, OccupiedPosition
+from TicTacToeGUI import TicTacToeGUI
 
-def main():
+def cli():
     print("=" * 100)
     print("TIC-TAC-TOE")
     print("=" * 100)
@@ -59,6 +62,13 @@ def main():
         status = board.game_over()
 
     print(f"{status[0]} Wins!")
+
+def main():
+    if "--cli" in sys.argv:
+        cli()
+    else: 
+        app = TicTacToeGUI()
+        app.run()
 
 if __name__ == "__main__":
     main()
