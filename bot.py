@@ -7,7 +7,7 @@ class TicTacToeBot:
     def is_draw(self) -> bool:
         return all(cell != '-' for cell in self.board)
 
-    def is_game_over(self) -> str | bool:
+    def is_game_over(self) -> str['X' | 'O'] | bool:
         for row in range(0, 9, 3):
             if self.board[row] != '-' and self.board[row] == self.board[row+1] == self.board[row+2]: 
                 return self.board[row]
@@ -24,7 +24,7 @@ class TicTacToeBot:
 
         return False
 
-    def available_moves(self) -> list: 
+    def available_moves(self) -> list[int]: 
         position_list = list()
 
         for index_pos in range(0,len(self.board)):
@@ -39,7 +39,7 @@ class TicTacToeBot:
     def undo_move(self, position) -> None: 
         self.board[position] = '-'
 
-    def minimax(self, max_player):
+    def minimax(self, max_player) -> int:
         winner = self.is_game_over() 
         if winner: 
             if winner == self.bot_token:
@@ -70,7 +70,7 @@ class TicTacToeBot:
 
             return min_score
 
-    def best_move(self):
+    def best_move(self) -> int:
         best_score = float('-inf')
         best_position = None
 
@@ -87,5 +87,5 @@ class TicTacToeBot:
 
         return best_position
 
-    def update_board(self, new_board):
+    def update_board(self, new_board) -> list[str]:
         self.board = new_board

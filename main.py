@@ -29,10 +29,10 @@ class TicTacToe:
         
         return False
 
-    def play_move(self, position, token):
+    def play_move(self, position, token) -> None:
         self.board[position] = token
 
-    def get_board(self):
+    def get_board(self) -> list[str]:
         return self.board
 
     def print_board(self) -> None:
