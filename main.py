@@ -26,7 +26,8 @@ def main():
 
     board.print_board()
 
-    while not board.game_over():
+    status = False, False
+    while not status[1]:
 
         if player_turn: 
             try: 
@@ -54,6 +55,10 @@ def main():
             bot.update_board(board.get_board())
             board.print_board()
             player_turn = True
+
+        status = board.game_over()
+
+    print(f"{status[0]} Wins!")
 
 if __name__ == "__main__":
     main()

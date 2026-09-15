@@ -5,30 +5,25 @@ class TicTacToe:
     def __init__(self):
         self.board = ['-','-','-','-','-','-','-','-','-']
 
-    def game_over(self) -> bool:
+    def game_over(self) -> tuple[str, bool]:
         for row in range(0, 9, 3):
             if self.board[row] != '-' and self.board[row] == self.board[row+1] == self.board[row+2]:
-                print(f"{self.board[row]} Wins!")
-                return True
+                return (self.board[row], True)
             
         for col in range(3):
             if self.board[col] != '-' and self.board[col] == self.board[col+3] == self.board[col+6]: 
-                print(f"{self.board[col]} Wins!")
-                return True 
+                return (self.board[col], True)
             
         if self.board[0] != '-' and self.board[0] == self.board[4] == self.board[8]: 
-            print(f"{self.board[0]} Wins!")
-            return True 
+            return (self.board[0], True)
         
         if self.board[2] != '-' and self.board[2] == self.board[4] == self.board[6]: 
-            print(f"{self.board[2]} Wins!")
-            return True 
+            return (self.board[2], True)
         
         if all(cell != '-' for cell in self.board): 
-            print("Draw!")
-            return True 
+            return ("-", True) 
         
-        return False
+        return ("", False)
 
     def play_move(self, position, token) -> None:
         if self.board[position]  != '-':
