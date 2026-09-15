@@ -7,7 +7,7 @@ class TicTacToeBot:
     def is_draw(self) -> bool:
         return all(cell != '-' for cell in self.board)
 
-    def is_game_over(self) -> str['X' | 'O'] | bool:
+    def is_game_over(self) -> str | bool:
         for row in range(0, 9, 3):
             if self.board[row] != '-' and self.board[row] == self.board[row+1] == self.board[row+2]: 
                 return self.board[row]
