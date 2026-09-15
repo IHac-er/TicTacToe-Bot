@@ -86,3 +86,6 @@ class TicTacToeBot:
                 best_position = position
 
         return best_position
+
+    def update_board(self, new_board):
+        self.board = new_board

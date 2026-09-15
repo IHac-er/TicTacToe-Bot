@@ -32,6 +32,10 @@ class TicTacToe:
     def play_move(self, position, token):
         self.board[position] = token
 
+    def get_board(self):
+        return self.board
+    
+
 def main():
     print("=" * 100)
     print("TIC-TAC-TOE")
@@ -48,6 +52,21 @@ def main():
     bot = TicTacToeBot(bot_token, player_token)
 
     board.print_board()
+
+    while not board.game_over():
+        if player_turn: 
+            player_choice = int(input("Enter a number (1-9): "))
+            board.play_move(player_choice-1, player_token)
+            bot.update_board(board.get_board())
+            board.print_board()
+            player_turn = False 
+        else:
+            print("Bot Thinking...")
+            bot_pos = bot.best_move()
+            board.play_move(bot_pos, bot_token)
+            bot.update_board(board.get_board())
+            board.print_board()
+            player_turn = True
 
 if __name__ == "__main__":
     main()
