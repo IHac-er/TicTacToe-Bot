@@ -29,6 +29,9 @@ class TicTacToe:
         
         return False
 
+    def play_move(self, position, token):
+        self.board[position] = token
+
 def main():
     print("=" * 100)
     print("TIC-TAC-TOE")
@@ -40,6 +43,11 @@ def main():
         player_token, bot_token = 'X' , 'O'
     else: 
         player_token, bot_token = 'O' , 'X'
+
+    board = TicTacToe() 
+    bot = TicTacToeBot(bot_token, player_token)
+
+    board.print_board()
 
 if __name__ == "__main__":
     main()
