@@ -15,6 +15,9 @@ class TicTacToeGUI:
         self.board_frame = tk.Frame(self.root)
         self.board_frame.pack(padx=10, pady=10)
 
+        self.status_label = tk.Label(self.root, text="")
+        self.status_label.pack()
+
         self.create_board()
 
     def handle_cell_click(self, position):
@@ -26,7 +29,13 @@ class TicTacToeGUI:
         self.buttons[position].config(text='X')
 
         if self.game.game_over()[1]:
-            print(self.game.game_over()[0])
+            winner = self.game.game_over()[0]
+
+            if winner == "-":
+                self.status_label.config(text="Draw!")
+            else: 
+                self.status_label.config(text=f"{winner} Wins!")
+
             return
 
         self.bot.update_board(self.game.get_board())
@@ -39,7 +48,13 @@ class TicTacToeGUI:
         self.bot.update_board(self.game.get_board())
 
         if self.game.game_over()[1]:
-            print(self.game.game_over()[0])
+            winner = self.game.game_over()[0]
+        
+            if winner == "-":
+                self.status_label.config(text="Draw!")
+            else: 
+                self.status_label.config(text=f"{winner} Wins!")
+        
             return
 
     def create_board(self):
